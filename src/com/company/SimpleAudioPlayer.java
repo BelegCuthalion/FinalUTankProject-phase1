@@ -31,8 +31,11 @@ public class SimpleAudioPlayer
         audioInputStream =
                 AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
 
+
+        AudioFormat format = audioInputStream.getFormat();
+        DataLine.Info info = new DataLine.Info(Clip.class, format);
+        clip = (Clip) AudioSystem.getLine(info);
         // create clip reference
-        clip = AudioSystem.getClip();
 
         // to close the clip when it's not running
         clip.addLineListener(myLineEvent -> {
